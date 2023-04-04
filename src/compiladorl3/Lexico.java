@@ -99,6 +99,9 @@ public class Lexico {
                         lexema.append(c);
                         estado = 99;
                         this.back();
+                    } if(c == '@'){
+                        lexema.append(c);
+                        estado = 8;
                     }else{
                         lexema.append(c);
                         throw new RuntimeException("Erro: token inválido \"" + lexema.toString() + "\"");
@@ -138,9 +141,10 @@ public class Lexico {
                         throw new RuntimeException("Erro: número float inválido \"" + lexema.toString() + "\"");
                     }
                     break;
+                
                 case 4:
                     if(this.isDigito(c)){
-                        lexema.append(c);
+                        
                         estado = 4;
                     }else{
                         this.back();
@@ -156,13 +160,31 @@ public class Lexico {
 
                     if(c == '.'){
                         lexema.append(c);
-                        estado = 1;
-
+                        estado = 7;
 
                     }
                     this.back();
+
+                case 7:
                     
-                    return new Token(lexema.toString(), Token.EMOJI); 
+                if(this.isLetra(c)){
+                    lexema.append(c);
+                    estado = 1;
+                    }
+                
+                    return new Token(lexema.toString(), Token.EMAIL);
+
+                case 8:
+                    if(this.isLetra(c) || this.isDigito(c) ){
+
+                        return new Token(lexema.toString(), Token.MENSAO);
+
+                    }
+                        
+                    break;
+                    
+
+                
                 case 99:
                     return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO); 
             }
