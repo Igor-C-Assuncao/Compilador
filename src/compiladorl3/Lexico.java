@@ -119,13 +119,6 @@ public class Lexico {
                         lexema.append(c);
                         estado = 99;
                         this.back();
-<<<<<<< HEAD
-
-=======
-                    } if(c == '@'){
-                        lexema.append(c);
-                        estado = 8;
->>>>>>> 274083b82a3edf4454431544cbe2d5e5368c2988
                     }else{
                         lexema.append(c);
                         throw new RuntimeException("Erro: token inválido \"" + lexema.toString() + "\"");
@@ -185,7 +178,6 @@ public class Lexico {
                     if (this.isDigito(c) || this.isLetra(c)) {
                         lexema.append(c);
                         estado = 7;
-<<<<<<< HEAD
                     } else if (lexema.toString().equalsIgnoreCase("if") || lexema.toString().equalsIgnoreCase("else")
                             || lexema.toString().equalsIgnoreCase("int") || lexema.toString().equalsIgnoreCase("float")
                             || lexema.toString().equalsIgnoreCase("char") || lexema.toString().equalsIgnoreCase("while")
@@ -285,32 +277,6 @@ public class Lexico {
                 
 
                
-=======
-
-                    }
-                    this.back();
-
-                case 7:
-                    
-                if(this.isLetra(c)){
-                    lexema.append(c);
-                    estado = 1;
-                    }
-                
-                    return new Token(lexema.toString(), Token.EMAIL);
-
-                case 8:
-                    if(this.isLetra(c) || this.isDigito(c) ){
-
-                        return new Token(lexema.toString(), Token.MENSAO);
-
-                    }
-                        
-                    break;
-                    
-
-                
->>>>>>> 274083b82a3edf4454431544cbe2d5e5368c2988
                 case 99:
                     return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO); 
             }
