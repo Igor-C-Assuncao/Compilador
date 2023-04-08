@@ -4,7 +4,6 @@ n123
 1
 123
 1.0
-<<<<<<< HEAD
 11.0
 11.22
 {}
@@ -16,6 +15,3 @@ else
 danilo@gmail.com
 else
 $
-=======
-danilo@unicap.com
->>>>>>> 274083b82a3edf4454431544cbe2d5e5368c2988
