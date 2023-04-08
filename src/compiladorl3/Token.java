@@ -18,9 +18,10 @@ public class Token {
     public static int TIPO_OPERADOR_ARITMETICO = 5;
     public static int TIPO_CARACTER_ESPECIAL = 6;
     public static int TIPO_PALAVRA_RESERVADA = 7;
-    public static int EMOJI = 8;
-    public static int EMAIL = 9;
-    public static int CEP = 10;
+    public static int TIPO_OPERADOR_ATRIBUICAO = 8;
+    public static int EMOJI = 9;
+    public static int EMAIL = 10;
+    public static int CEP = 11;
     public static int TIPO_FIM_CODIGO = 99;
     
     private int tipo; //tipo do token
@@ -58,10 +59,14 @@ public class Token {
             case 6:
                 return this.lexema + " - CARACTER_ESPECIAL";
             case 7:
-                return this.lexema + " - EMOJI";
+                return this.lexema + " - PALAVRA_RESERVADA";
             case 8:
-                return this.lexema + " - EMAIL";
+                return this.lexema + " - OPERADOR_ATRIBUICAO";
             case 9:
+                return this.lexema + " - EMOJI";
+            case 10:
+                return this.lexema + " - EMAIL";
+            case 11:
                 return this.lexema + " - CEP";
             case 99:
                 return this.lexema + " - FIM_CODIGO";            }
