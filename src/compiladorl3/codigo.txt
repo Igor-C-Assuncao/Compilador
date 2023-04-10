@@ -8,10 +8,8 @@ n123
 11.22
 {}
     ;
-123abs
-1_
+
 if 
 else
-danilo@gmail.com
-else
-$
+
+==

@@ -74,7 +74,7 @@ public class Lexico {
                     }
                     else if(this.isLetra(c) || c == '_'){
                         lexema.append(c);
-                        estado = 7;
+                        estado = 1;
                     }
                     else if(this.isDigito(c)){
                         lexema.append(c);
@@ -95,10 +95,10 @@ public class Lexico {
                         estado = 8;
                     } else if (c == '>') {
                         lexema.append(c);
-                        estado = 11;
-                    } else if (c == '=') {
+                        estado = 8;
+                    } else if (c == '=' || c == '!') {
                         lexema.append(c);
-                        estado = 13;
+                        estado = 10;
                     } else if (c == '+' ||
                             c == '-' ||
                             c == '*' ||
@@ -127,7 +127,7 @@ public class Lexico {
                 case 1:
                     if(this.isLetra(c) || this.isDigito(c) || c == '_'){
                         lexema.append(c);
-                        estado = 1;                        
+                        estado = 7;                        
                     }else{
                         this.back();
                         return new Token(lexema.toString(), Token.TIPO_IDENTIFICADOR);                        
