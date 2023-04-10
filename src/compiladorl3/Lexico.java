@@ -96,9 +96,9 @@ public class Lexico {
                     } else if (c == '>') {
                         lexema.append(c);
                         estado = 8;
-                    } else if (c == '=' || c == '!') {
+                    } else if (c == '=') {
                         lexema.append(c);
-                        estado = 10;
+                        estado = 8;
                     } else if (c == '+' ||
                             c == '-' ||
                             c == '*' ||
@@ -112,7 +112,12 @@ public class Lexico {
                     
                     }else if(c == ':'){
                         lexema.append(c);
-                        estado = 6;
+                        estado = 10;
+                        break;
+                    
+                    }else if(c == '@'){
+                        lexema.append(c);
+                        estado = 19;
                         break;
                     
                     }else if(c == '$'){
@@ -199,28 +204,28 @@ public class Lexico {
                     case 8:
                     if (c == '>') {
                         lexema.append(c);
-                        estado = 9;
+                        estado = 8;
                     } else if (c == '=') {
                         lexema.append(c);
-                        estado = 9;
+                        estado = 8;
                     } else {
                         this.back();
                         return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
                     }
                     break;
 
-                case 9:
-                    this.back();
-                    return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
+              
                 case 10:
-                    if (c == '=') {
+                    if (c == ')' || c == '(' || c == '*') {
                         lexema.append(c);
-                        this.back();
-                        return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
+                        estado = 11;
+                       
                     }
                     break;
 
-              
+                case 11:
+                    this.back();
+                    return new Token(lexema.toString(), Token.EMOJI);
 
                 case 12:
                     if (this.isDigito(c) || this.isLetra(c)) {
@@ -262,21 +267,31 @@ public class Lexico {
                         estado = 17;
                         
                     
-                    }else if( c == '.') {
+                    }else if (c == '.') {
+                        lexema.append(c);
                         estado = 18;
                     }
-                        
+                    break;
                 case 18:
-                    if(this.isDigito(c) || this.isLetra(c)) {
+                    if(isLetra(c)) {
+                        lexema.append(c);
+                        estado = 18;
+                    }else{
                         this.back();
                         return new Token(lexema.toString(), Token.EMAIL);
-                }else{
-                    throw new RuntimeException("Erro: token inválido para tipo Email \"" + lexema.toString() + "\"");
-                }
+                    }
+                    break;
                 
-                
+                case 19:
 
-               
+                    if(isLetra(c) || isDigito(c)){
+                        lexema.append(c);
+                        estado = 19;
+                    }else{
+                        this.back();
+                        return new Token(lexema.toString(), Token.MENSAO);
+                    }
+                    break;
                 case 99:
                     return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO); 
             }
