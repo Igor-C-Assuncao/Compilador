@@ -18,3 +18,11 @@ danilo@unicap.br
 @caiaooiphone
 ==
 <=
+
+int a=10;
+a === b
+
+n10
+10n
+a >>= b
+
