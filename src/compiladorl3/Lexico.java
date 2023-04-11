@@ -95,7 +95,7 @@ public class Lexico {
                         estado = 8;
                     } else if (c == '>') {
                         lexema.append(c);
-                        estado = 8;
+                        estado = 14;
                     } else if (c == '=') {
                         lexema.append(c);
                         estado = 8;
@@ -204,16 +204,16 @@ public class Lexico {
                     case 8:
                     if (c == '>') {
                         lexema.append(c);
-                        estado = 8;
+                        estado = 9;
                     } else if (c == '=') {
                         lexema.append(c);
-                        estado = 8;
-                    } else {
-                        this.back();
-                        return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
+                        estado = 9;
                     }
                     break;
-
+                
+                case 9: 
+                this.back();
+                return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
               
                 case 10:
                     if (c == ')' || c == '(' || c == '*') {
@@ -246,10 +246,9 @@ public class Lexico {
                 case 14:
                     if (c == '=') {
                         lexema.append(c);
-                        estado = 14;
+                        estado = 20;
                     } else {
-                        this.back();
-                        return new Token(lexema.toString(), Token.TIPO_OPERADOR_ATRIBUICAO);
+                        throw new RuntimeException("Erro: token mal formatado para tipo operador \"" + lexema.toString() + "\"");
                     }
                     break;
 
@@ -292,6 +291,14 @@ public class Lexico {
                         return new Token(lexema.toString(), Token.MENSAO);
                     }
                     break;
+
+
+                case 20 : 
+
+                    this.back();
+                    return new Token(lexema.toString(), Token.TIPO_OPERADOR_ATRIBUICAO);
+
+
                 case 99:
                     return new Token(lexema.toString(), Token.TIPO_FIM_CODIGO); 
             }
