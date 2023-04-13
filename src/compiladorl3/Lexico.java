@@ -95,10 +95,10 @@ public class Lexico {
                         estado = 8;
                     } else if (c == '>') {
                         lexema.append(c);
-                        estado = 14;
+                        estado = 20;
                     } else if (c == '=') {
                         lexema.append(c);
-                        estado = 8;
+                        estado = 14;
                     } else if (c == '+' ||
                             c == '-' ||
                             c == '*' ||
@@ -248,7 +248,8 @@ public class Lexico {
                         lexema.append(c);
                         estado = 20;
                     } else {
-                        throw new RuntimeException("Erro: token mal formatado para tipo operador \"" + lexema.toString() + "\"");
+                        this.back();
+                        return new Token(lexema.toString(), Token.TIPO_OPERADOR_ATRIBUICAO);
                     }
                     break;
 
@@ -293,10 +294,10 @@ public class Lexico {
                     break;
 
 
-                case 20 : 
-
+                case 20: 
+                    
                     this.back();
-                    return new Token(lexema.toString(), Token.TIPO_OPERADOR_ATRIBUICAO);
+                    return new Token(lexema.toString(), Token.TIPO_OPERADOR_RELACIONAL);
 
 
                 case 99:
