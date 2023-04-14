@@ -242,6 +242,7 @@ public class Lexico {
                     } else {
                         throw new RuntimeException("Erro: token mal formatado para tipo char \"" + lexema.toString() + "\"");    
                     }
+                    break;
                 
                 case 14:
                     if (c == '=') {
