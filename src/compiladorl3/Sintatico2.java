@@ -66,18 +66,38 @@ public class Sintatico2 {
         this.token = this.lexico.nextToken();       
 
     }
-    
-    private void decl_ar() {
 
-        if (this.token.getLexema().equals("int") || this.token.getLexema().equals("float")
-        || this.token.getLexema().equals("char")) {
-            this.token = this.lexico.nextToken();
-
-        }else {
-            throw new RuntimeException("tai ddido, tu tem que informat o tipo da id (int, float, char) pertim de  "
-                    + this.token.getLexema().toString());
+        
+    private void DECLARACAO(){
+        if(!(this.token.getLexema().equals("int") ||
+                this.token.getLexema().equals("float"))){
+            throw new RuntimeException("Tu vacilou na delcaração de variável. "
+                    + "Pertinho de: " + this.token.getLexema());
         }
+        this.token = this.lexico.nextToken();
+        if(this.token.getTipo() != Token.TIPO_IDENTIFICADOR){
+            throw new RuntimeException("Tu vacilou na delcaração de variável. "
+                    + "Pertinho de: " + this.token.getLexema());
+        }
+        this.token = this.lexico.nextToken();
+        if(!this.token.getLexema().equalsIgnoreCase(";")){
+            throw new RuntimeException("Tu vacilou  na delcaração de variável. "
+                    + "Pertinho de: " + this.token.getLexema());
+        }
+        this.token = this.lexico.nextToken();        
     }
+    
+    // private void decl_ar() {
+
+    //     if (this.token.getLexema().equals("int") || this.token.getLexema().equals("float")
+    //     || this.token.getLexema().equals("char")) {
+    //         this.token = this.lexico.nextToken();
+
+    //     }else {
+    //         throw new RuntimeException("tai ddido, tu tem que informat o tipo da id (int, float, char) pertim de  "
+    //                 + this.token.getLexema().toString());
+    //     }
+    // }
 
     
 
@@ -174,25 +194,7 @@ public class Sintatico2 {
     }
 
  
-        
-    private void DECLARACAO(){
-        if(!(this.token.getLexema().equals("int") ||
-                this.token.getLexema().equals("float"))){
-            throw new RuntimeException("Tu vacilou na delcaração de variável. "
-                    + "Pertinho de: " + this.token.getLexema());
-        }
-        this.token = this.lexico.nextToken();
-        if(this.token.getTipo() != Token.TIPO_IDENTIFICADOR){
-            throw new RuntimeException("Tu vacilou na delcaração de variável. "
-                    + "Pertinho de: " + this.token.getLexema());
-        }
-        this.token = this.lexico.nextToken();
-        if(!this.token.getLexema().equalsIgnoreCase(";")){
-            throw new RuntimeException("Tu vacilou  na delcaração de variável. "
-                    + "Pertinho de: " + this.token.getLexema());
-        }
-        this.token = this.lexico.nextToken();        
-    }
+    
     
     private void ATRIBUICAO(){
         if(this.token.getTipo() != Token.TIPO_IDENTIFICADOR){
@@ -235,6 +237,8 @@ public class Sintatico2 {
                 throw new RuntimeException("cade o fator aritmetico Rapaz , pertinho de =>  " + this.token.getLexema().toString());
         
             }
+
+
             this.Termo();
             this.fator();
               
@@ -242,6 +246,28 @@ public class Sintatico2 {
     }
     
     private void fator() {
+        if (token.getLexema().equals("(")) {
+            this.token = this.lexico.nextToken();
+
+
+
+            this.expr_arit();
+
+
+
+            if (!token.getLexema().equals(")")) {
+                throw new RuntimeException("cader o parente pra fechar meu irmao ) pertinho " + this.token.getLexema().toString());
+            }
+
+            this.token = this.lexico.nextToken();
+            
+        }
+
+        if (this.token.getTipo() == Token.TIPO_INTEIRO || this.token.getTipo() == Token.TIPO_REAL || this.token.getTipo() == Token.TIPO_CHAR|| this.token.getTipo() == Token.TIPO_IDENTIFICADOR) {
+            this.token = this.lexico.nextToken();
+        } else {
+            throw new RuntimeException("cadee o dentificador cabra ,bota ai algum desse: float, int ou char.   pertinho de :  " + this.token.getLexema());
+        }
 
 
     }
@@ -251,6 +277,9 @@ public class Sintatico2 {
                 this.token.getTipo() == Token.TIPO_INTEIRO ||
                 this.token.getTipo() == Token.TIPO_REAL){
             this.token = this.lexico.nextToken();
+
+            this.OP();
+
         }else{
             throw new RuntimeException("Oxe, era para ser um identificador "
                     + "ou número pertinho de " + this.token.getLexema());
