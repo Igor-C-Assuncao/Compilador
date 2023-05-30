@@ -1,31 +1,8 @@
+main (){
 
-n1
-n123
-1
-_1
-123
-1.0
-11.0
-11.22
-{}
-    ;
-:)
-:(
-:*
-if 
-else
-danilo@unicap.br
-@caiaooiphone
-==
-<=
+    int a;
+    a = 10;
+	
 
-int a=10;
-a === b
-'a'
-n10
-10n
-a >>= b
-
-:* 
-
-$
+}
+$ 

@@ -290,7 +290,7 @@ public class Lexico {
                         estado = 19;
                     }else{
                         this.back();
-                        return new Token(lexema.toString(), Token.MENSAO);
+                        return new Token(lexema.toString(), Token.MENCAO);
                     }
                     break;
 
