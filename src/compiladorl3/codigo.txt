@@ -1,7 +1,12 @@
-main (){
-    int a;
-
+main () {
+    
+    float a;
     a = 10;
+    
+    
 
+
+    
 }
+
 $ 
