@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Sintatico2 {
     private Lexico lexico;
     private Token token;
-    private int saveValores;
+    private int valueStored;
     private ArrayList<String> listaDeIds;
 
     public Sintatico2(Lexico lexico) {
@@ -24,13 +24,13 @@ public class Sintatico2 {
         this.token = this.lexico.nextToken();
 
         if (!token.getLexema().equals("(")) {
-            throw new RuntimeException("Abre o parêntese do main cabra!");
+            throw new RuntimeException("Se minha vida é errada,ninguem tem nada com isso, abre esse parentese");
         }
 
         this.token = this.lexico.nextToken();
 
         if (!token.getLexema().equals(")")) {
-            throw new RuntimeException("Fechar o parêntese do main cabra!");
+            throw new RuntimeException("Se minha vida é errada,ninguem tem nada com isso, fecha esse parentese");
         }
         this.token = this.lexico.nextToken();
 
@@ -175,7 +175,7 @@ public class Sintatico2 {
     //  A
     private void ATRIBUICAO() {
         if (this.token.getTipo() != Token.TIPO_IDENTIFICADOR) {
-            throw new RuntimeException("Onde está o ID para atribuição? Pertinho de: " + this.token.getLexema());
+            throw new RuntimeException("Se minha vida é errada,ninguem tem nada com isso, cade o ID  pertinho de " + this.token.getLexema());
         }
 
         this.findId(this.token.getLexema());
@@ -191,7 +191,7 @@ public class Sintatico2 {
         this.expr_arit();
 
         if (!this.token.getLexema().equals(";")) {
-            throw new RuntimeException("Passei a noite em claro eu não consegui dormir perambulando pelos bares esperando que esse 'código' funcione. Pertinho de: " + this.token.getLexema() +
+            throw new RuntimeException("Passei a noite em claro eu não consegui dormir perambulando pelos bares esperando que esse 'código' funcione e voce nao esqueca o ;.  Pertinho de: " + this.token.getLexema() +
                     " Cadê o ; ?");
         }
         this.token = this.lexico.nextToken();
@@ -269,17 +269,18 @@ public class Sintatico2 {
 
     private void findId(String id) {
         if (this.listaDeIds.isEmpty()) {
-            throw new RuntimeException("Necessário declarar uma variável: " + this.token.getLexema());
+            throw new RuntimeException("Necessário declarar uma variável " + this.token.getLexema().toString());
         }
-        boolean found = false;
+
         for (int i = 0; i < this.listaDeIds.size(); i++) {
             if (id.equals(listaDeIds.get(i))) {
-                found = true;
-                break;
+                valueStored = 1;
             }
         }
-        if (!found) {
-            throw new RuntimeException("Necessário declarar uma variável: " + this.token.getLexema());
+
+        if (valueStored != 1) {
+            throw new RuntimeException("Necessário declarar uma variável " + this.token.getLexema().toString());
         }
+        
     }
 }

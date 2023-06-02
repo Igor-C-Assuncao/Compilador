@@ -1,15 +1,25 @@
 main () {
-     int a;
-     a = 90;
-     int b;
-     b = 9;
+    int a;
+    a = 90;
+    
+  
     char w;
     w = 'p';
 
+    
+
     if (w == 10){
         int lado;
-        lado = a * b;
+        lado = a * b
+        while ( w <  100 ){
+            int altura;
+            altura = a /2;
+        }
+        
+        
     }
+    
+
     
 }
 
