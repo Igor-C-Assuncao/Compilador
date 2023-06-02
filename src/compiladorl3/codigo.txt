@@ -1,12 +1,18 @@
 main () {
-    
-    float a;
-    a = 10;
-    
-    
+     int a;
+     a = 90;
+     int b;
+     b = 9;
+    char w;
+    w = 'p';
 
-
+    if (w == 10){
+        int lado;
+        lado = a * b;
+    }
     
 }
 
-$ 
+
+
+$
